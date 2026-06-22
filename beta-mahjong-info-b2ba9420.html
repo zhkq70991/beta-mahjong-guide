@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>麻将胡了 · 稳定信息与使用说明</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #fcdab0 0%, #f9b87a 50%, #e89a5e 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.25rem;
+      line-height: 1.7;
+      color: #2e241e;
+    }
+
+    .card-container {
+      max-width: 960px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 32px;
+      padding: 2.25rem 2.5rem;
+      box-shadow: 0 12px 30px rgba(100, 60, 30, 0.18);
+      transition: box-shadow 0.2s ease;
+      border: 1px solid rgba(255, 230, 200, 0.5);
+    }
+
+    .card:hover {
+      box-shadow: 0 16px 40px rgba(80, 48, 20, 0.25);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 2.75rem 2.5rem 2.25rem;
+    }
+
+    .hero h1 {
+      font-size: 2.25rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #4c2a1b;
+      margin-bottom: 0.6rem;
+      background: linear-gradient(130deg, #b85f2a, #7e3f1f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .subhead {
+      font-size: 1.1rem;
+      color: #5f3d2b;
+      background: rgba(230, 180, 140, 0.3);
+      display: inline-block;
+      padding: 0.2rem 1.2rem;
+      border-radius: 60px;
+      backdrop-filter: blur(2px);
+      margin-top: 0.3rem;
+    }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+    }
+
+    .card h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #5f321d;
+      margin-bottom: 1rem;
+      border-left: 5px solid #e6974e;
+      padding-left: 1rem;
+    }
+
+    .card p {
+      margin-bottom: 0.9rem;
+      color: #3c2b21;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .card li {
+      padding: 0.4rem 0 0.4rem 1.8rem;
+      position: relative;
+      color: #3f2d21;
+    }
+
+    .card li::before {
+      content: "▪";
+      color: #cf7e42;
+      font-weight: bold;
+      position: absolute;
+      left: 0.2rem;
+    }
+
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1rem;
+      margin: 1rem 0 0.2rem;
+    }
+
+    .tag {
+      background: #ebd2ba;
+      color: #4c2b1b;
+      padding: 0.25rem 1rem;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .faq-item {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(200, 160, 120, 0.3);
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-item strong {
+      display: block;
+      font-weight: 600;
+      color: #4b2c19;
+      margin-bottom: 0.15rem;
+    }
+
+    .link-sentence {
+      background: #f1e3d5;
+      border-radius: 24px;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 1.05rem;
+      border: 1px solid rgba(200, 165, 125, 0.3);
+    }
+
+    .link-sentence a {
+      display: inline-block;
+      background: #d4813e;
+      color: #fff8f0;
+      padding: 0.35rem 1.4rem;
+      border-radius: 60px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      margin: 0 0.15rem;
+    }
+
+    .link-sentence a:hover {
+      background: #b6692e;
+      transform: scale(1.02);
+    }
+
+    .link-sentence a:active {
+      background: #9c5724;
+    }
+
+    .footnote {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #5d3f2b;
+      opacity: 0.75;
+    }
+
+    @media (max-width: 670px) {
+      body {
+        padding: 1.5rem 1rem;
+      }
+      .card {
+        padding: 1.75rem 1.5rem;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .grid-2col {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .link-sentence {
+        padding: 1.25rem 1rem;
+        font-size: 0.98rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+      .card h2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+
+    <!-- hero 主视觉卡片 -->
+    <div class="card hero">
+      <h1>麻将胡了</h1>
+      <div class="subhead">稳定入口 · 页面说明 · 信息一览</div>
+      <p style="margin-top:1.2rem; max-width:600px; margin-left:auto; margin-right:auto;">
+        <a href="https://beta-mahjong.com" style="color:#b7682c; font-weight:600; text-decoration:none; border-bottom:2px solid #d4813e;">麻将胡了</a> 
+        作为一款长期维护的线上娱乐场景，提供清晰的功能分区与简洁的交互流程。
+        本页从使用角度汇总了核心用途、适用用户及常见疑问，方便新用户快速了解整体定位。
+      </p>
+    </div>
+
+    <!-- 两列：用途卡片 + 适合人群 -->
+    <div class="grid-2col">
+
+      <!-- 用途卡片 -->
+      <div class="card">
+        <h2>场景与用途</h2>
+        <p>页面围绕稳定入口与信息说明展开，主要用途包括：</p>
+        <ul>
+          <li>快速了解 <strong>麻将胡了</strong> 的基础功能与界面模块</li>
+          <li>查阅常见规则说明、环境适配信息</li>
+          <li>获取功能更新摘要与常规提示</li>
+          <li>作为长期稳定的访问起点，减少重复导航成本</li>
+        </ul>
+        <div class="tag-group">
+          <span class="tag">信息总览</span>
+          <span class="tag">功能索引</span>
+          <span class="tag">新手指南</span>
+        </div>
+      </div>
+
+      <!-- 适合人群 -->
+      <div class="card">
+        <h2>适合人群</h2>
+        <p>以下用户均可在本页找到对应内容：</p>
+        <ul>
+          <li>首次接触 <a href="https://beta-mahjong.com" style="color:#b7682c; font-weight:500; text-decoration:none;">麻将胡了</a> 的体验者</li>
+          <li>希望快速确认页面入口稳定性的常用户</li>
+          <li>需要在不同设备上获得一致说明的浏览者</li>
+          <li>对功能框架和基础规则有了解需求的玩家</li>
+        </ul>
+        <p style="margin-top:0.8rem; font-size:0.95rem; background:#f2e4d6; padding:0.5rem 1rem; border-radius:30px;">
+          ✓ 无需注册即可查阅全部说明
+        </p>
+      </div>
+    </div>
+
+    <!-- FAQ 摘要卡片 -->
+    <div class="card">
+      <h2>FAQ 摘要 · 快速参考</h2>
+      <div class="faq-item">
+        <strong>▸ 麻将胡了 的页面入口是否长期可用？</strong>
+        <span>是的，域名 <a href="https://beta-mahjong.com" style="color:#b7682c; text-decoration:none; font-weight:500;">麻将胡了</a> 保持稳定解析，页面内容持续更新。</span>
+      </div>
+      <div class="faq-item">
+        <strong>▸ 是否需要下载额外程序？</strong>
+        <span>不需要。基于浏览器即可直接使用，页面经过响应式适配，移动端与桌面端均可正常浏览。</span>
+      </div>
+      <div class="faq-item">
+        <strong>▸ 页面内容多久更新一次？</strong>
+        <span>功能与说明随版本迭代同步更新，重大调整会通过公告区提示。建议定期回看本页说明。</span>
+      </div>
+      <div class="faq-item">
+        <strong>▸ 有使用门槛或年龄限制吗？</strong>
+        <span>本页为信息说明页，内容面向一般用户。具体功能的使用条件请以页面实际引导为准。</span>
+      </div>
+    </div>
+
+    <!-- 自然链接段落 卡片按钮感 -->
+    <div class="link-sentence">
+      <span>想直接体验完整功能？</span>
+      <a href="https://beta-mahjong.com">麻将胡了</a>
+      <span>已开放所有基础模块，无需额外配置。</span>
+    </div>
+
+    <div class="footnote">
+      说明页仅作介绍用途 · 内容定期核校
+    </div>
+
+  </div>
+</body>
+</html>
